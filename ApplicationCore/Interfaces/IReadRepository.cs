@@ -1,0 +1,9 @@
+﻿using Ardalis.Specification;
+using Nika1337.Library.ApplicationCore.Entities;
+
+namespace Nika1337.Library.ApplicationCore.Interfaces;
+
+public interface IReadRepository<T> : IReadRepositoryBase<T> where T : BaseModel
+{
+
+}
