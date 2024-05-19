@@ -28,5 +28,15 @@ internal class NavigationMenuItemConfiguration : IEntityTypeConfiguration<Naviga
             .HasOne(cnmi => cnmi.ParentNavigationMenuItem)
             .WithMany(pnmi => pnmi.ChildNavigationMenuItems)
             .OnDelete(DeleteBehavior.Restrict);
+
+        SeedData(builder);
+    }
+
+    private void SeedData(EntityTypeBuilder<NavigationMenuItem> builder)
+    {
+        builder
+            .HasData(
+            []
+            );
     }
 }

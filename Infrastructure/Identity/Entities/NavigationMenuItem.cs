@@ -8,6 +8,6 @@ public class NavigationMenuItem
     public int Id { get; set; }
     public required string Name { get; set; }
     public required string Route { get; set; }
-    public required NavigationMenuItem ParentNavigationMenuItem { get; set; }
+    public NavigationMenuItem? ParentNavigationMenuItem { get; set; }
     public ICollection<NavigationMenuItem> ChildNavigationMenuItems { get; } = [];
 }
