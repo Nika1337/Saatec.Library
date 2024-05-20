@@ -1,16 +1,17 @@
-﻿@using Nika1337.Library.Infrastructure.Identity.Entities
-@model IEnumerable<NavigationMenuItem>
+﻿@using Nika1337.Library.Infrastructure.Identity.Dtos
+
+@model IEnumerable<NavigationMenuItemDto>
 
 
 
 @functions {
-    private string RenderMenu(IEnumerable<NavigationMenuItem> items)
+    private string RenderMenu(IEnumerable<NavigationMenuItemDto> items)
     {
         var sb = new System.Text.StringBuilder();
 
         foreach (var item in items)
         {
-            if (item.ChildNavigationMenuItems.Any())
+            if (item.ChildNavigationMenuItemDtos.Any())
             {
                 sb.AppendLine($@"
                     <li class='nav-item dropdown'>
@@ -18,7 +19,7 @@
                         {item.Name}
                         </a>
                         <ul class='dropdown-menu dropdown-menu-dark dropdown-menu-end'>
-                        {RenderSubMenu(item.ChildNavigationMenuItems)}
+                    {RenderSubMenu(item.ChildNavigationMenuItemDtos)}
                         </ul>
                     </li>");
             }
@@ -33,13 +34,13 @@
 
         return sb.ToString();
     }
-    private string RenderSubMenu(IEnumerable<NavigationMenuItem> items)
+    private string RenderSubMenu(IEnumerable<NavigationMenuItemDto> items)
     {
         var sb = new System.Text.StringBuilder();
 
         foreach (var item in items)
         {
-            if (item.ChildNavigationMenuItems.Any())
+            if (item.ChildNavigationMenuItemDtos.Any())
             {
                 sb.AppendLine($@"
                     <li class='dropdown-submenu'>
@@ -47,7 +48,7 @@
                         {item.Name}
                         </a>
                         <ul class='dropdown-menu dropdown-menu-dark dropdown-menu-end'>
-                        {RenderSubMenu(item.ChildNavigationMenuItems)}
+                    {RenderSubMenu(item.ChildNavigationMenuItemDtos)}
                         </ul>
                     </li>");
             }
