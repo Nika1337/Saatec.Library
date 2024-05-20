@@ -27,7 +27,7 @@ public class MailJetEmailSender : IEmailSender
     {
         try
         {
-            return await TrySendEmailAsync(fromEmail, toEmail, subject, body);
+            return await Execute(fromEmail, toEmail, subject, body);
         }
         catch (Exception ex)
         {
@@ -36,7 +36,7 @@ public class MailJetEmailSender : IEmailSender
         }
     }
 
-    private async Task<bool> TrySendEmailAsync(string fromEmail, string toEmail, string subject, string body)
+    private async Task<bool> Execute(string fromEmail, string toEmail, string subject, string body)
     {
         var client = new MailjetClient(_apiKey, _secretKey);
 
