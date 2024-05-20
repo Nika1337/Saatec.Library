@@ -5,24 +5,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+    <link href="~/lib/mdbootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/mdbootstrap/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/lib/mdbootstrap/css/style.css" rel="stylesheet" />
     
     <style>
 
-        /* Position nested dropdowns to the right */
         .dropdown-submenu {
             position: relative;
         }
 
-            .dropdown-submenu .dropdown-menu {
-                top: 0;
-                left: 100%;
-                margin-top: -1px;
-            }
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
     </style>
-
 </head>
 <body>
     <header>
@@ -34,15 +32,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="~/lib/mdbootstrap/js/popper.min.js"></script>
+    <script src="~/lib/mdbootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/mdbootstrap/js/mdb.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

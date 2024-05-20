@@ -1,5 +1,7 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Nika1337.Library.Infrastructure.Identity;
 using Nika1337.Library.Infrastructure.Identity.Entities;
 using Nika1337.Library.Infrastructure.Identity.Services;
@@ -9,12 +11,29 @@ var builder = WebApplication.CreateBuilder(args);
 
 Nika1337.Library.Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddControllersWithViews();
+builder.Services.AddMvc();
+
+//builder.Services.AddControllers(config =>
+//{
+//    var policy = new AuthorizationPolicyBuilder()
+//                     .RequireAuthenticatedUser()
+//                     .Build();
+//    config.Filters.Add(new AuthorizeFilter(policy));
+//});
+
+//builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
+//  .AddRoles <EmployeeRole>() // Enable role management.
+//  .AddEntityFrameworkStores<IdentityContext>();
 
 
-builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
-  .AddRoles <EmployeeRole>() // Enable role management.
-  .AddEntityFrameworkStores<IdentityContext>();
+builder.Services.AddIdentity<Employee, EmployeeRole>(o =>
+{
+    o.Stores.MaxLengthForKeys = 128;
+    o.SignIn.RequireConfirmedAccount = true;
+})
+.AddEntityFrameworkStores<IdentityContext>()
+.AddDefaultTokenProviders();
 
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -44,8 +63,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-    options.LoginPath = "/Identity/Account/Login";
-    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.LoginPath = "/EmployeeAccount/Login";
+    options.AccessDeniedPath = "/EmployeeAccount/AccessDenied";
     options.SlidingExpiration = true;
 });
 
@@ -76,6 +95,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
 
 app.Run();
