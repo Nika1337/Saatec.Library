@@ -12,8 +12,8 @@ using Nika1337.Library.Infrastructure.Identity;
 namespace Nika1337.Library.Infrastructure.Identity.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20240518161120_InitialMigrationForIdentity_RoleFix")]
-    partial class InitialMigrationForIdentity_RoleFix
+    [Migration("20240520075641_InitialCreateForIdentity")]
+    partial class InitialCreateForIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,10 +93,12 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -133,10 +135,12 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -169,6 +173,9 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<string>("IdNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -195,6 +202,9 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -259,31 +269,31 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f86cded2-1936-424a-a1a6-894144897244",
+                            Id = "3d0aa018-74f4-44de-abed-dfebc3c392e4",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "ca224f4d-306c-434a-be0b-a45284ea021c",
+                            Id = "5915c50a-14c8-45e3-8670-23de10a2fbee",
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
-                            Id = "1f6c8abf-8622-4dc8-9020-c092b4cc7ec5",
+                            Id = "1f6b41ad-18dd-46dd-ba6c-7e4f3fc8a148",
                             Name = "Consultant",
                             NormalizedName = "CONSULTANT"
                         },
                         new
                         {
-                            Id = "07bd36ad-80f7-4bfd-bc08-47c4a9441e64",
+                            Id = "7f492ba2-94e7-4929-adf0-54c3743add76",
                             Name = "Core Librarian",
                             NormalizedName = "CORELIBRARIAN"
                         },
                         new
                         {
-                            Id = "20061e17-cffa-4828-b3e6-0934fa58c715",
+                            Id = "e30323c8-6c43-4848-be80-60283e171916",
                             Name = "Human Resources Manager",
                             NormalizedName = "HRMANAGER"
                         });
@@ -302,7 +312,7 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                         .HasMaxLength(75)
                         .HasColumnType("nvarchar(75)");
 
-                    b.Property<int>("ParentNavigationMenuItemId")
+                    b.Property<int?>("ParentNavigationMenuItemId")
                         .HasColumnType("int");
 
                     b.Property<string>("Route")
@@ -403,8 +413,8 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                                 .HasColumnType("nvarchar(100)");
 
                             b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)");
 
                             b1.Property<string>("State")
                                 .HasMaxLength(50)
@@ -431,9 +441,7 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                 {
                     b.HasOne("Nika1337.Library.Infrastructure.Identity.Entities.NavigationMenuItem", "ParentNavigationMenuItem")
                         .WithMany("ChildNavigationMenuItems")
-                        .HasForeignKey("ParentNavigationMenuItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ParentNavigationMenuItemId");
 
                     b.Navigation("ParentNavigationMenuItem");
                 });

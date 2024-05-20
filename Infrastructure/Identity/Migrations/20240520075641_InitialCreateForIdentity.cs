@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Nika1337.Library.Infrastructure.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrationForIdentity_RoleFix : Migration
+    public partial class InitialCreateForIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +21,7 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
                     Route = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ParentNavigationMenuItemId = table.Column<int>(type: "int", nullable: false)
+                    ParentNavigationMenuItemId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,8 +31,7 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                         name: "FK_AspNetNavigationMenuItem_AspNetNavigationMenuItem_ParentNavigationMenuItemId",
                         column: x => x.ParentNavigationMenuItemId,
                         principalTable: "AspNetNavigationMenuItem",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -59,8 +58,10 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                     Address_City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Address_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Address_Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Address_PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address_PostalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TerminationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -155,8 +156,8 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -200,8 +201,8 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -220,11 +221,11 @@ namespace Nika1337.Library.Infrastructure.Identity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "07bd36ad-80f7-4bfd-bc08-47c4a9441e64", null, "Core Librarian", "CORELIBRARIAN" },
-                    { "1f6c8abf-8622-4dc8-9020-c092b4cc7ec5", null, "Consultant", "CONSULTANT" },
-                    { "20061e17-cffa-4828-b3e6-0934fa58c715", null, "Human Resources Manager", "HRMANAGER" },
-                    { "ca224f4d-306c-434a-be0b-a45284ea021c", null, "Librarian", "LIBRARIAN" },
-                    { "f86cded2-1936-424a-a1a6-894144897244", null, "Administrator", "ADMINISTRATOR" }
+                    { "1f6b41ad-18dd-46dd-ba6c-7e4f3fc8a148", null, "Consultant", "CONSULTANT" },
+                    { "3d0aa018-74f4-44de-abed-dfebc3c392e4", null, "Administrator", "ADMINISTRATOR" },
+                    { "5915c50a-14c8-45e3-8670-23de10a2fbee", null, "Librarian", "LIBRARIAN" },
+                    { "7f492ba2-94e7-4929-adf0-54c3743add76", null, "Core Librarian", "CORELIBRARIAN" },
+                    { "e30323c8-6c43-4848-be80-60283e171916", null, "Human Resources Manager", "HRMANAGER" }
                 });
 
             migrationBuilder.CreateIndex(
