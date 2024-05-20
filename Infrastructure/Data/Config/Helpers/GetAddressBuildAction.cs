@@ -27,6 +27,10 @@ internal static partial class Helpers
             ad
             .Property(ci => ci.Country)
             .HasMaxLength(100);
+
+            ad
+            .Property(ci => ci.PostalCode)
+            .HasMaxLength(10);
         };
     }
 }
