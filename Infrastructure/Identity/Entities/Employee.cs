@@ -9,6 +9,8 @@ public class Employee : IdentityUser
     public required string IdNumber { get; set; }
     public required Address Address { get; set; }
     public required DateTime DateOfBirth { get; set; }
+    public required decimal Salary { get; set; }
+    public required Gender Gender { get; set; }
     public required DateTime StartDate { get; set; }
-    public required DateTime? TerminationDate { get; set;}
+    public DateTime? TerminationDate { get; set;}
 }
