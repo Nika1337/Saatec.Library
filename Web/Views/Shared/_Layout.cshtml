@@ -5,10 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link href="~/lib/mdbootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/lib/mdbootstrap/css/mdb.min.css" rel="stylesheet" />
-    <link href="~/lib/mdbootstrap/css/style.css" rel="stylesheet" />
-    
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LibraryManagement.styles.css" asp-append-version="true" />
+   
+    <style>
+        .input-group .input-group-append .btn {
+            border-left: none;
+        }
+    </style>
     <style>
 
         .dropdown-submenu {
@@ -33,10 +40,9 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="~/lib/mdbootstrap/js/popper.min.js"></script>
-    <script src="~/lib/mdbootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/mdbootstrap/js/mdb.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -63,9 +63,6 @@ public class IdentityNavigationService(UserManager<Employee> userManager, RoleMa
         return menuItems;
     }
 
-
-
-
     private IList<NavigationMenuItem> FilterNonAccessibleChildren(IList<NavigationMenuItem> menuItems)
     {
         var parentItems = menuItems.Where(nmi => nmi.ParentNavigationMenuItem is null).ToList();
@@ -104,6 +101,7 @@ public class IdentityNavigationService(UserManager<Employee> userManager, RoleMa
             }
         }
     }
+
     private IList<NavigationMenuItemDto> MapToDtos(IList<NavigationMenuItem> menuItems)
     {
         var dtos = new List<NavigationMenuItemDto>();
@@ -131,5 +129,3 @@ public class IdentityNavigationService(UserManager<Employee> userManager, RoleMa
         return dto;
     }
 }
-
-// [(null, 1), (null,2), (null,3), (1,4), (1,5), (2,6), (6,7)]

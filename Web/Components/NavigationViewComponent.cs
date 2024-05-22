@@ -23,12 +23,7 @@ public class NavigationViewComponent(IdentityNavigationService navigationService
         Route = "/services",
         ChildNavigationMenuItemDtos = new List<NavigationMenuItemDto>
         {
-            new NavigationMenuItemDto
-            {
-                Name = "Consulting",
-                Route = "/services/consulting",
-                ChildNavigationMenuItemDtos = new List<NavigationMenuItemDto>()
-            },
+
             new NavigationMenuItemDto
             {
                 Name = "Support",
@@ -48,7 +43,13 @@ public class NavigationViewComponent(IdentityNavigationService navigationService
                         ChildNavigationMenuItemDtos = new List<NavigationMenuItemDto>()
                     },
                 }
-            }
+            },
+            new NavigationMenuItemDto
+            {
+                Name = "Consulting",
+                Route = "/services/consulting",
+                ChildNavigationMenuItemDtos = new List<NavigationMenuItemDto>()
+            },
         }
     },
     new NavigationMenuItemDto

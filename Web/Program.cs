@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Nika1337.Library.ApplicationCore.Interfaces;
 using Nika1337.Library.Infrastructure.Identity;
 using Nika1337.Library.Infrastructure.Identity.Entities;
 using Nika1337.Library.Infrastructure.Identity.Services;
+using Nika1337.Library.Infrastructure.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,12 +65,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-    options.LoginPath = "/EmployeeAccount/Login";
+    options.LoginPath = "/EmployeeAccount/SignIn";
     options.AccessDeniedPath = "/EmployeeAccount/AccessDenied";
     options.SlidingExpiration = true;
 });
 
 builder.Services.AddScoped<IdentityNavigationService>();
+builder.Services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
 var app = builder.Build();
 
